@@ -17,7 +17,7 @@ architectures:
 
 apps:
   android-studio:
-    command: bin/studio.sh
+    command: android-studio/bin/studio.sh
     desktop: jetbrains-studio.desktop
 
 parts:
