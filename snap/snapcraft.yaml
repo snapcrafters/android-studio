@@ -1,5 +1,5 @@
 name: android-studio
-version: '3.0'
+version: '3.0.0.18'
 summary: IDE for Android
 description: |
   Android Studio provides the fastest tools for
@@ -31,4 +31,3 @@ parts:
   android-studio:
     plugin: dump
     source: https://dl.google.com/dl/android/studio/ide-zips/3.0.0.18/android-studio-ide-171.4408382-linux.zip
-
