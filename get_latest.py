@@ -28,10 +28,10 @@ def get_latest_studio_url():
 def fetch_latest_version_details():
     version, url = get_latest_studio_url()
 
-    with open('snapcraft.yaml') as f:
+    with open('snap/snapcraft.yaml') as f:
         lines = f.readlines()
 
-    with open('snapcraft.yaml', 'w') as f:
+    with open('snap/snapcraft.yaml', 'w') as f:
         for line in lines:
             if line.startswith('version:'):
                 f.write(re.sub('version:.*', 'version: \'{}\''.format(version), line))
