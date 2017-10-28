@@ -1,6 +1,5 @@
 #!/usr/bin/python3
 
-import argparse
 import re
 import urllib.request
 
@@ -21,19 +20,26 @@ def get_latest_studio_url():
         raise RuntimeError('Multiple urls found, expected only one, urls are: {}'.format(
             ' '.join(links)))
 
-    return links[0][0]
+    url = links[0][0]
+    version = url.split('/')[-2]
+    return version, url
 
 
-def get_latest_studio_version():
-    return get_latest_studio_url().split('/')[-2]
+def fetch_latest_version_details():
+    version, url = get_latest_studio_url()
+
+    with open('snapcraft.yaml') as f:
+        lines = f.readlines()
+
+    with open('snapcraft.yaml', 'w') as f:
+        for line in lines:
+            if line.startswith('version:'):
+                f.write(re.sub('version:.*', 'version: \'{}\''.format(version), line))
+            elif 'source: https' in line:
+                f.write(re.sub('source: https.*', 'source: {}'.format(url), line))
+            else:
+                f.write(line)
 
 
 if __name__ == '__main__':
-    parser = argparse.ArgumentParser(description='Android Studio down URL grabber.')
-    parser.add_argument('output', help='Whether to print version or url.',
-                        choices=['version', 'url'])
-    args = parser.parse_args()
-    if args.output == 'version':
-        print(get_latest_studio_version())
-    else:
-        print(get_latest_studio_url())
+    fetch_latest_version_details()
