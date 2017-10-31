@@ -2,18 +2,18 @@ name: android-studio
 version: '3.0.0.18'
 summary: IDE for Android
 description: |
-  Android Studio provides the fastest tools for
-  building apps on every type of Android device.
+  Android Studio provides the fastest tools for building apps on every type
+  of Android device.
 
-  World-class code editing, debugging, performance
-  tooling, a flexible build system, and an instant
-  build/deploy system all allow you to focus on
+  World-class code editing, debugging, performance tooling, a flexible build
+  system, and an instant build/deploy system all allow you to focus on
   building unique and high quality apps.
 
 grade: stable
 confinement: classic
 architectures:
   - amd64
+  - i386
 
 apps:
   android-studio:
