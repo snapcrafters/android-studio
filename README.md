@@ -15,7 +15,7 @@ distributions.</p>
 
 ## Install
 
-    sudo snap install android-studio
+    sudo snap install android-studio --classic
 
 ([Don't have snapd installed?](https://snapcraft.io/docs/core/install))
 
