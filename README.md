@@ -1,5 +1,5 @@
 <h1 align="center">
-  <img src="https://avatars1.githubusercontent.com/u/29598503?v=3&s=256" alt="Android Studio">
+  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/34/Android_Studio_icon.svg/2000px-Android_Studio_icon.svg.png" alt="Android Studio" width="256" height="256">
   <br />
   Android Studio
 </h1>
@@ -15,7 +15,6 @@ distributions.</p>
 
 ## Install
 
-    sudo apt install snapd-xdg-open
     sudo snap install android-studio
 
 ([Don't have snapd installed?](https://snapcraft.io/docs/core/install))
@@ -30,7 +29,7 @@ distributions.</p>
 
 Snapcrafters ([join us](https://forum.snapcraft.io/t/join-snapcrafters/1325)) 
 are working to land snap install documentation and
-the [snapcraft.yaml](https://github.com/snapcrafters/fork-and-rename-me/blob/master/snap/snapcraft.yaml)
+the [snapcraft.yaml](https://github.com/snapcrafters/android-studio/blob/master/snap/snapcraft.yaml)
 upstream so Android Studio can authoritatively publish future releases.
 
   - [x] Fork the [Snapcrafters template](https://github.com/snapcrafters/fork-and-rename-me) repository to your own GitHub account.
