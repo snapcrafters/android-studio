@@ -21,6 +21,11 @@ apps:
     desktop: jetbrains-studio.desktop
 
 parts:
+  enable-i386:
+    plugin: nil
+    prepare: |
+      dpkg --add-architecture i386
+      apt update
   desktop:
     after:
       - android-studio
@@ -29,8 +34,7 @@ parts:
     prime:
       - jetbrains-studio.desktop
   android-studio:
-    prepare: |
-      dpkg --add-architecture i386
+    after: [enable-i386]
     plugin: dump
     source: https://dl.google.com/dl/android/studio/ide-zips/3.0.1.0/android-studio-ide-171.4443003-linux.zip
     stage-packages:
