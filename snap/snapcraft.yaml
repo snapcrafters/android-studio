@@ -42,4 +42,4 @@ parts:
       - libncurses5:i386
       - libstdc++6:i386
       - libbz2-1.0:i386
-      - lib32z1
+      - zlib1g:i386
