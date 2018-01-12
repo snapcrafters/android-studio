@@ -18,7 +18,7 @@ architectures:
 apps:
   android-studio:
     environment:
-      LD_LIBRARY_PATH: $SNAP/usr/lib/x86_64-linux-gnu:$SNAP/usr/lib/i386-linux-gnu:$SNAP/lib/i386-linux-gnu:$SNAP/usr/lib32:$SNAP/lib32:$LD_LIBRARY_PATH
+      LD_LIBRARY_PATH: $SNAP/usr/lib/i386-linux-gnu:$SNAP/lib/i386-linux-gnu:$SNAP/usr/lib32:$SNAP/lib32:$LD_LIBRARY_PATH
     command: android-studio/bin/studio.sh
     desktop: jetbrains-studio.desktop
 
@@ -40,9 +40,6 @@ parts:
     plugin: dump
     source: https://dl.google.com/dl/android/studio/ide-zips/3.0.1.0/android-studio-ide-171.4443003-linux.zip
     stage-packages:
-      - libxrender1
-      - libxtst6
-      - libxi6
       - on amd64:
         - libc6:i386
         - libncurses5:i386
