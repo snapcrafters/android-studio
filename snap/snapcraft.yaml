@@ -17,6 +17,8 @@ architectures:
 
 apps:
   android-studio:
+    environment:
+      LD_LIBRARY_PATH: $SNAP/usr/lib/i386-linux-gnu:$SNAP/lib/i386-linux-gnu:$SNAP/usr/lib32:$SNAP/lib32:$LD_LIBRARY_PATH
     command: android-studio/bin/studio.sh
     desktop: jetbrains-studio.desktop
 
