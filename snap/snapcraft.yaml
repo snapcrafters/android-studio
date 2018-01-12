@@ -46,4 +46,4 @@ parts:
         - lib32z1
       - libxrender1
       - libxtst6
-      - libxi6i
+      - libxi6
