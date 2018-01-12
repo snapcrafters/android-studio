@@ -44,3 +44,6 @@ parts:
         - libstdc++6:i386
         - libbz2-1.0:i386
         - lib32z1
+      - libxrender1
+      - libxtst6
+      - libxi6i
