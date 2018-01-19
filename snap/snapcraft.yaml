@@ -13,7 +13,6 @@ grade: stable
 confinement: classic
 architectures:
   - amd64
-  - i386
 
 apps:
   android-studio:
