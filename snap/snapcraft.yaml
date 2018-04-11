@@ -30,3 +30,5 @@ parts:
   android-studio:
     plugin: dump
     source: https://dl.google.com/dl/android/studio/ide-zips/3.1.1.0/android-studio-ide-173.4697961-linux.zip
+    build-attributes:
+      - no-patchelf
