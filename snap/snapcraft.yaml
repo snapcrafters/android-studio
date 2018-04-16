@@ -11,8 +11,6 @@ description: |
 
 grade: stable
 confinement: classic
-architectures:
-  - amd64
 
 apps:
   android-studio:
