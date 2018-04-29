@@ -1,5 +1,5 @@
 name: android-studio
-version: '3.1.1.0'
+version: '3.1.2.0'
 summary: IDE for Android
 description: |
   Android Studio provides the fastest tools for building apps on every type
@@ -27,6 +27,6 @@ parts:
       - jetbrains-studio.desktop
   android-studio:
     plugin: dump
-    source: https://dl.google.com/dl/android/studio/ide-zips/3.1.1.0/android-studio-ide-173.4697961-linux.zip
+    source: https://dl.google.com/dl/android/studio/ide-zips/3.1.2.0/android-studio-ide-173.4720617-linux.zip
     build-attributes:
       - no-patchelf
