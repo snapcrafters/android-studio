@@ -26,4 +26,4 @@ def get_latest_studio_url():
 
 
 if __name__ == '__main__':
-    print(' '.join(list(get_latest_studio_url())))
+    print(' '.join(get_latest_studio_url()))
