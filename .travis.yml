@@ -1,0 +1,9 @@
+language: generic
+sudo: true
+dist: xenial
+
+before_script:
+  - sudo snap install snapcraft --classic
+
+script:
+  - snapcraft
