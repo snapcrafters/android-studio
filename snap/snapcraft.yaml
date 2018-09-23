@@ -1,6 +1,7 @@
 name: android-studio
-version: '3.1.4.0'
-summary: IDE for Android
+version: latest
+version-script: cat $SNAPCRAFT_STAGE/version
+summary: The IDE for Android
 description: |
   Android Studio provides the fastest tools for building apps on every type
   of Android device.
@@ -26,7 +27,29 @@ parts:
     prime:
       - jetbrains-studio.desktop
   android-studio:
-    plugin: dump
-    source: https://dl.google.com/dl/android/studio/ide-zips/3.1.4.0/android-studio-ide-173.4907809-linux.zip
+    plugin: nil
+    override-build: |
+      snapcraftctl build
+      echo "Get latest release..."
+      RELEASE_INFO=$(python3 -u get_latest.py)
+      VERSION=$(echo $RELEASE_INFO | cut -d ' ' -f1)
+      echo $VERSION > $SNAPCRAFT_STAGE/version
+      DOWNLOAD_URL=$(echo ${RELEASE_INFO} | cut -d ' ' -f2)
+
+      # Download the latest tarball
+      ARCHITECTURE=$(uname -m)
+      if [ "${ARCHITECTURE}" != "x86_64" ]; then
+        echo "ERROR! We only support amd64 for Android Studio. Failing the build here."
+        exit 1
+      fi
+      wget --quiet "${DOWNLOAD_URL}" -O "${SNAPCRAFT_PART_INSTALL}/android-studio.zip"
+      unzip -q "${SNAPCRAFT_PART_INSTALL}/android-studio.zip" -d "${SNAPCRAFT_PART_INSTALL}"
+
+      # Cleanup
+      rm "${SNAPCRAFT_PART_INSTALL}/android-studio.zip"
+    build-packages:
+      - unzip
+      - wget
+      - python3
     build-attributes:
       - no-patchelf

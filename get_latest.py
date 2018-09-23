@@ -25,21 +25,5 @@ def get_latest_studio_url():
     return version, url
 
 
-def fetch_latest_version_details():
-    version, url = get_latest_studio_url()
-
-    with open('snap/snapcraft.yaml') as f:
-        lines = f.readlines()
-
-    with open('snap/snapcraft.yaml', 'w') as f:
-        for line in lines:
-            if line.startswith('version:'):
-                f.write(re.sub('version:.*', 'version: \'{}\''.format(version), line))
-            elif 'source: https' in line:
-                f.write(re.sub('source: https.*', 'source: {}'.format(url), line))
-            else:
-                f.write(line)
-
-
 if __name__ == '__main__':
-    fetch_latest_version_details()
+    print(' '.join(get_latest_studio_url()))
