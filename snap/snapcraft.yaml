@@ -13,6 +13,9 @@ description: |
 grade: stable
 confinement: classic
 
+architectures:
+  - build-on: amd64
+
 apps:
   android-studio:
     command: android-studio/bin/studio.sh
@@ -36,12 +39,6 @@ parts:
       echo $VERSION > $SNAPCRAFT_STAGE/version
       DOWNLOAD_URL=$(echo ${RELEASE_INFO} | cut -d ' ' -f2)
 
-      # Download the latest tarball
-      ARCHITECTURE=$(uname -m)
-      if [ "${ARCHITECTURE}" != "x86_64" ]; then
-        echo "ERROR! We only support amd64 for Android Studio. Failing the build here."
-        exit 1
-      fi
       wget --quiet "${DOWNLOAD_URL}" -O "${SNAPCRAFT_PART_INSTALL}/android-studio.zip"
       unzip -q "${SNAPCRAFT_PART_INSTALL}/android-studio.zip" -d "${SNAPCRAFT_PART_INSTALL}"
 
