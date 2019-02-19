@@ -22,6 +22,14 @@ apps:
     desktop: jetbrains-studio.desktop
 
 parts:
+  gnome:
+    plugin: nil
+    build-packages:
+      - software-properties-common
+    override-pull: |
+      add-apt-repository -y ppa:ubuntu-desktop/gnome-3-26
+      apt -y update
+      apt -y upgrade
   desktop:
     after:
       - android-studio
@@ -30,6 +38,7 @@ parts:
     prime:
       - jetbrains-studio.desktop
   android-studio:
+    after: [gnome]
     plugin: nil
     override-build: |
       snapcraftctl build
