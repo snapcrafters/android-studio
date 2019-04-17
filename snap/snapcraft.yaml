@@ -56,5 +56,11 @@ parts:
     build-packages:
       - wget
       - python3
+    stage-packages:
+      - libx11-6
+      - libxau6
+      - libxdmcp6
+      - libxext6
+      - libpng16-16
     build-attributes:
       - no-patchelf
