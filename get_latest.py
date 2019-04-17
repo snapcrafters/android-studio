@@ -10,7 +10,7 @@ def get_latest_studio_url():
     with urllib.request.urlopen(URL_STUDIO_HOME) as response:
         html = response.read().decode()
 
-    matched = re.findall('"((https)?://.*linux.zip)"', html)
+    matched = re.findall('"((https)?://.*linux.tar.gz)"', html)
     # Ensure unique and then convert to a list of easy access.
     links = list(set(matched))
 

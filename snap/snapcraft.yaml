@@ -48,13 +48,12 @@ parts:
       echo $VERSION > $SNAPCRAFT_STAGE/version
       DOWNLOAD_URL=$(echo ${RELEASE_INFO} | cut -d ' ' -f2)
 
-      wget --quiet "${DOWNLOAD_URL}" -O "${SNAPCRAFT_PART_INSTALL}/android-studio.zip"
-      unzip -q "${SNAPCRAFT_PART_INSTALL}/android-studio.zip" -d "${SNAPCRAFT_PART_INSTALL}"
+      wget --quiet "${DOWNLOAD_URL}" -O "${SNAPCRAFT_PART_INSTALL}/android-studio.tar.gz"
+      tar -xf "${SNAPCRAFT_PART_INSTALL}/android-studio.tar.gz" -C "${SNAPCRAFT_PART_INSTALL}"
 
       # Cleanup
-      rm "${SNAPCRAFT_PART_INSTALL}/android-studio.zip"
+      rm "${SNAPCRAFT_PART_INSTALL}/android-studio.tar.gz"
     build-packages:
-      - unzip
       - wget
       - python3
     build-attributes:
