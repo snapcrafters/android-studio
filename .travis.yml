@@ -8,6 +8,7 @@ env:
 
 install:
   - sudo apt update
+  - sudo apt purge lxd -y
   - sudo apt install -y snapd
   - sudo snap install lxd --channel 3.0/stable
   - sudo snap install snapcraft --candidate --classic
