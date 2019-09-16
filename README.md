@@ -4,6 +4,8 @@
   Android Studio
 </h1>
 
+[![Android Studio](https://snapcraft.io/android-studio/badge.svg)](https://snapcraft.io/android-studio)
+
 <p align="center"><b>This is the snap for Android Studio</b>, <i>"The IDE of Android"</i>. It works on Ubuntu, Fedora, Debian, and other major Linux
 distributions.</p>
 
@@ -14,6 +16,8 @@ distributions.</p>
 -->
 
 ## Install
+
+[![Get it from the Snap Store](https://snapcraft.io/static/images/badges/en/snap-store-black.svg)](https://snapcraft.io/android-studio)
 
     sudo snap install android-studio --classic
 
