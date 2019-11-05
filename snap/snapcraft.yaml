@@ -1,6 +1,5 @@
 name: android-studio
-version: latest
-version-script: cat $SNAPCRAFT_STAGE/version
+adopt-info: android-studio
 summary: The IDE for Android
 description: |
   Android Studio provides the fastest tools for building apps on every type
@@ -44,8 +43,6 @@ parts:
       snapcraftctl build
       echo "Get latest release..."
       RELEASE_INFO=$(python3 -u get_latest.py)
-      VERSION=$(echo $RELEASE_INFO | cut -d ' ' -f1)
-      echo $VERSION > $SNAPCRAFT_STAGE/version
       DOWNLOAD_URL=$(echo ${RELEASE_INFO} | cut -d ' ' -f2)
 
       wget --quiet "${DOWNLOAD_URL}" -O "${SNAPCRAFT_PART_INSTALL}/android-studio.tar.gz"
@@ -53,6 +50,10 @@ parts:
 
       # Cleanup
       rm "${SNAPCRAFT_PART_INSTALL}/android-studio.tar.gz"
+
+      # Set version
+      snapcraftctl build
+      snapcraftctl set-version $(echo $RELEASE_INFO | cut -d ' ' -f1)
     build-packages:
       - wget
       - python3
