@@ -11,7 +11,6 @@ description: |
 
 grade: stable
 confinement: classic
-base: core
 
 architectures:
   - build-on: amd64
@@ -40,7 +39,6 @@ parts:
   android-studio:
     after: [gnome]
     plugin: nil
-    source: .
     override-build: |
       snapcraftctl build
       echo "Get latest release..."
@@ -59,7 +57,5 @@ parts:
     build-packages:
       - wget
       - python3
-    stage-packages:
-      - libpng16-16
     build-attributes:
       - no-patchelf
