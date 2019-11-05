@@ -11,6 +11,7 @@ description: |
 
 grade: stable
 confinement: classic
+base: core
 
 architectures:
   - build-on: amd64
