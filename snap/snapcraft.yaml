@@ -30,7 +30,7 @@ parts:
     prime:
       - jetbrains-studio.desktop
   android-studio:
-    plugin: dump
+    plugin: nil
     source: .
     override-build: |
       snapcraftctl build
