@@ -20,10 +20,10 @@ script:
   - sudo /snap/bin/lxd waitready
   - sudo /snap/bin/lxd init --auto
   - mkdir -p "$TRAVIS_BUILD_DIR/snaps-cache"
-  - sudo snapcraft --use-lxd
-after_success:
-  - cp *.snap "$(echo "$TRAVIS_REPO_SLUG" | sed -e 's|.*/\(.*\)|\1|')-pr$TRAVIS_PULL_REQUEST.snap"
-  - timeout 180 transfer "$(echo "$TRAVIS_REPO_SLUG" | sed -e 's|.*/\(.*\)|\1|')-pr$TRAVIS_PULL_REQUEST.snap"
+  - export PATH=/snap/bin:$PATH
+  - sudo snapcraft cleanbuild
+  - sudo cp *.snap "$(echo "$TRAVIS_REPO_SLUG" | sed -e 's|.*/\(.*\)|\1|')-pr$TRAVIS_PULL_REQUEST.snap"
+
 after_failure:
   - sudo journalctl -u snapd
   - http https://api.snapcraft.io/v2/snaps/info/core architecture==amd64 Snap-Device-Series:16

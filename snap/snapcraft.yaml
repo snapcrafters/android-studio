@@ -20,6 +20,8 @@ apps:
   android-studio:
     command: android-studio/bin/studio.sh
     desktop: jetbrains-studio.desktop
+    environment:
+      PULSE_SERVER: $XDG_RUNTIME_DIR/../pulse/native
 
 parts:
   desktop:
