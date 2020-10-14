@@ -8,15 +8,16 @@ env:
 addons:
   snaps:
     - name: snapcraft
-      channel: stable
       classic: true
     - name: http
-    - name: multipass
+    - name: lxd
 
 script:
+  - sudo /snap/bin/lxd waitready
+  - sudo /snap/bin/lxd init --auto
   - mkdir -p "$TRAVIS_BUILD_DIR/snaps-cache"
   - export PATH=/snap/bin:$PATH
-  - sudo snapcraft
+  - sudo snapcraft --use-lxd
   - sudo cp *.snap "$(echo "$TRAVIS_REPO_SLUG" | sed -e 's|.*/\(.*\)|\1|')-pr$TRAVIS_PULL_REQUEST.snap"
 
 after_failure:
