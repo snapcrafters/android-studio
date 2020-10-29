@@ -19,18 +19,10 @@ architectures:
 apps:
   android-studio:
     command: android-studio/bin/studio.sh
-    desktop: jetbrains-studio.desktop
     environment:
       PULSE_SERVER: $XDG_RUNTIME_DIR/../pulse/native
 
 parts:
-  desktop:
-    after:
-      - android-studio
-    plugin: dump
-    source: .
-    prime:
-      - jetbrains-studio.desktop
   android-studio:
     plugin: nil
     source: .
@@ -47,7 +39,6 @@ parts:
       rm "${SNAPCRAFT_PART_INSTALL}/android-studio.tar.gz"
 
       # Set version
-      snapcraftctl build
       snapcraftctl set-version $(echo $RELEASE_INFO | cut -d ' ' -f1)
     build-packages:
       - wget
