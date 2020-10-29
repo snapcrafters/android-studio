@@ -11,6 +11,7 @@ description: |
 
 grade: stable
 confinement: classic
+base: core20
 
 architectures:
   - build-on: amd64
@@ -23,14 +24,6 @@ apps:
       PULSE_SERVER: $XDG_RUNTIME_DIR/../pulse/native
 
 parts:
-  gnome:
-    plugin: nil
-    build-packages:
-      - software-properties-common
-    override-pull: |
-      add-apt-repository -y ppa:ubuntu-desktop/gnome-3-26
-      apt -y update
-      apt -y upgrade
   desktop:
     after:
       - android-studio
@@ -39,8 +32,8 @@ parts:
     prime:
       - jetbrains-studio.desktop
   android-studio:
-    after: [gnome]
     plugin: nil
+    source: .
     override-build: |
       snapcraftctl build
       echo "Get latest release..."
