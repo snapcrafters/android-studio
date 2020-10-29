@@ -2,8 +2,8 @@
 Version=1.0
 Type=Application
 Name=Android Studio
-Icon=/android-studio/bin/studio.png
-Exec="/android-studio/bin/studio.sh" %f
+Icon=${SNAP}/android-studio/bin/studio.png
+Exec=android-studio %f
 Comment=Android Studio
 Categories=Development;IDE;
 Terminal=false
