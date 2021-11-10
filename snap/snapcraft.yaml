@@ -20,7 +20,7 @@ apps:
   android-studio:
     command: android-studio/bin/studio.sh
     environment:
-      PULSE_SERVER: $XDG_RUNTIME_DIR/../pulse/native
+      PULSE_SERVER: $XDG_RUNTIME_DIR/pulse/native
 
 parts:
   android-studio:
