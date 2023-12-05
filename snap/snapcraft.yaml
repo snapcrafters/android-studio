@@ -8,25 +8,20 @@ description: |
   World-class code editing, debugging, performance tooling, a flexible build
   system, and an instant build/deploy system all allow you to focus on
   building unique and high quality apps.
-
 grade: stable
 confinement: classic
 base: core22
 compression: lzo
 architectures:
   - build-on: amd64
-
 apps:
   android-studio:
     command: bin/studio.sh
     environment:
       PULSE_SERVER: $XDG_RUNTIME_DIR/pulse/native
-      
-
 parts:
   android-studio:
     plugin: dump
     source: https://redirector.gvt1.com/edgedl/android/studio/ide-zips/2023.1.1.26/android-studio-2023.1.1.26-linux.tar.gz
     build-attributes:
       - no-patchelf
-
