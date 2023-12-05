@@ -1,5 +1,5 @@
 name: android-studio
-adopt-info: android-studio
+version: '2023.1.1.26'
 summary: The IDE for Android
 description: |
   Android Studio provides the fastest tools for building apps on every type
@@ -11,37 +11,22 @@ description: |
 
 grade: stable
 confinement: classic
-base: core20
+base: core22
 compression: lzo
 architectures:
   - build-on: amd64
 
 apps:
   android-studio:
-    command: android-studio/bin/studio.sh
+    command: bin/studio.sh
     environment:
       PULSE_SERVER: $XDG_RUNTIME_DIR/pulse/native
+      
 
 parts:
   android-studio:
-    plugin: nil
-    source: .
-    override-build: |
-      snapcraftctl build
-      echo "Get latest release..."
-      RELEASE_INFO=$(python3 -u get_latest.py)
-      DOWNLOAD_URL=$(echo ${RELEASE_INFO} | cut -d ' ' -f2)
-
-      wget --quiet "${DOWNLOAD_URL}" -O "${SNAPCRAFT_PART_INSTALL}/android-studio.tar.gz"
-      tar -xf "${SNAPCRAFT_PART_INSTALL}/android-studio.tar.gz" -C "${SNAPCRAFT_PART_INSTALL}"
-
-      # Cleanup
-      rm "${SNAPCRAFT_PART_INSTALL}/android-studio.tar.gz"
-
-      # Set version
-      snapcraftctl set-version $(echo $RELEASE_INFO | cut -d ' ' -f1)
-    build-packages:
-      - wget
-      - python3
+    plugin: dump
+    source: https://redirector.gvt1.com/edgedl/android/studio/ide-zips/2023.1.1.26/android-studio-2023.1.1.26-linux.tar.gz
     build-attributes:
       - no-patchelf
+
