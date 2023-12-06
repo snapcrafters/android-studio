@@ -2,7 +2,7 @@
 Version=1.0
 Type=Application
 Name=Android Studio
-Icon=${SNAP}/android-studio/bin/studio.png
+Icon=${SNAP}/bin/studio.png
 Exec=android-studio %f
 Comment=Android Studio
 Categories=Development;IDE;
