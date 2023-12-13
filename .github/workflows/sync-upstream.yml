@@ -24,6 +24,6 @@ jobs:
           update-script: |
             source_url="$(curl -sL https://developer.android.com/studio/index.html | grep -Eo '"((https)?://.*linux.tar.gz)"' | tr -d '"')"
             codename="$(curl -sL https://developer.android.com/studio/index.html | grep -Po 'Download Android Studio (?!today)[A-Za-z0-9]+' | head -n1 | cut -d ' ' -f4)"
-            version="$(echo "$source_url" | rev | cut -d '/' -f2 | rev && echo "$codename")"
-            sed -i 's/^\(source: \).*$/\1'"\"$source_url\""'/' snap/snapcraft.yaml
+            version="$(basename "$source_url" .tar.gz | grep -oP '\d+\.\d+\.\d+\.\d+') $codename"
+            yq -i ".parts.android-studio.source = \"$source_url\"" snap/snapcraft.yaml
             sed -i 's/^\(version: \).*$/\1'"\"$version\""'/' snap/snapcraft.yaml
