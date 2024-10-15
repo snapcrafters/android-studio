@@ -1,5 +1,5 @@
 name: android-studio
-version: "2024.2.1.9-Ladybug"
+version: "2024.2.1.10-Ladybug"
 summary: The IDE for Android
 description: |
   Android Studio provides the fastest tools for building apps on every type
@@ -22,6 +22,6 @@ apps:
 parts:
   android-studio:
     plugin: dump
-    source: https://redirector.gvt1.com/edgedl/android/studio/ide-zips/2024.2.1.9/android-studio-2024.2.1.9-linux.tar.gz
+    source: https://redirector.gvt1.com/edgedl/android/studio/ide-zips/2024.2.1.10/android-studio-2024.2.1.10-linux.tar.gz
     build-attributes:
       - no-patchelf
