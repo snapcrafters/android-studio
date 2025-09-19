@@ -70,12 +70,6 @@ upstream so Android Studio can authoritatively publish future releases.
 
 If you have any questions, [post in the Snapcraft forum](https://forum.snapcraft.io).
 
-## The Snapcrafters
-
-| [![Omer Akram](https://avatars1.githubusercontent.com/u/6350837?v=4)](https://github.com/om26er/) |
-| :-----------------------------------------------------------------------------------------------: |
-|                             [Omer Akram](https://github.com/om26er/)                              |
-
 <!-- Uncomment and modify this when you have upstream contacts
 ## Upstream
 
