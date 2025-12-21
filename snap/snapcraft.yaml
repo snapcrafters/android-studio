@@ -22,6 +22,6 @@ apps:
 parts:
   android-studio:
     plugin: dump
-    source: https://redirector.gvt1.com/edgedl/android/studio/ide-zips/2025.2.2.7/android-studio-2025.2.2.7-linux.tar.gz
+    source: https://edgedl.me.gvt1.com/edgedl/android/studio/ide-zips/2025.2.2.7/android-studio-2025.2.2.7-linux.tar.gz
     build-attributes:
       - no-patchelf
