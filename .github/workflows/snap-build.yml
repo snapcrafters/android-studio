@@ -1,0 +1,101 @@
+name: Build and smoke test snap
+
+on:
+  push:
+  pull_request:
+    branches: ["candidate"]
+  workflow_dispatch:
+
+jobs:
+  build:
+    name: Build snap
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Build snap
+        uses: snapcore/action-build@v1
+        id: build
+
+      - name: Show Snapcraft log on build failure
+        if: failure()
+        run: cat /home/runner/.local/state/snapcraft/log/snapcraft*.log
+
+      - name: Review snap
+        uses: diddlesnaps/snapcraft-review-action@v1
+        with:
+          snap: ${{ steps.build.outputs.snap }}
+          isClassic: "true"
+
+      - name: Upload snap artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: android-studio-snap
+          path: ${{ steps.build.outputs.snap }}
+          retention-days: 7
+
+  smoke-test:
+    name: Launch snap and capture screenshots
+    runs-on: ubuntu-latest
+    needs: build
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Download snap artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: android-studio-snap
+
+      - name: Enable KVM
+        run: |
+          echo 'KERNEL=="kvm", GROUP="kvm", MODE="0666", OPTIONS+="static_node=kvm"' | sudo tee /etc/udev/rules.d/99-kvm4all.rules
+          sudo udevadm control --reload-rules
+          sudo udevadm trigger --name-match=kvm
+
+      - name: Set up LXD
+        uses: canonical/setup-lxd@v0.1.1
+
+      - name: Install ghvmctl
+        run: |
+          sudo snap install ghvmctl
+          sudo snap connect ghvmctl:lxd lxd:lxd
+
+      - name: Prepare VM
+        run: ghvmctl prepare
+
+      - name: Install local snap in VM
+        run: |
+          set -eux
+          SNAP_FILE=$(find . -maxdepth 1 -name '*.snap' | head -n 1)
+          VM_NAME=$(ghvmctl exec -- hostname | tr -d '\n')
+          lxc file push "$SNAP_FILE" "local:${VM_NAME}/home/ubuntu/$(basename "$SNAP_FILE")"
+          ghvmctl exec -- sudo snap install --dangerous --classic "/home/ubuntu/$(basename "$SNAP_FILE")"
+
+      - name: Launch Android Studio
+        run: |
+          ghvmctl snap-run android-studio.android-studio
+          sleep 90
+
+      - name: Capture screenshots
+        if: always()
+        run: |
+          ghvmctl screenshot-full
+          ghvmctl screenshot-window
+          ls -lh "$HOME/ghvmctl-screenshots/" || true
+
+      - name: Show app logs
+        if: always()
+        run: ghvmctl exec -- cat /home/ubuntu/android-studio.android-studio.log 2>/dev/null || true
+
+      - name: Upload screenshots
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: android-studio-screenshots
+          path: ~/ghvmctl-screenshots/
+          if-no-files-found: warn
+          retention-days: 14
