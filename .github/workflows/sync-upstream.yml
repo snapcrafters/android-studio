@@ -27,5 +27,5 @@ jobs:
             source_version="$(printf '%s' "$source_url" | sed -E 's#^.*/ide-zips/([0-9.]+)/.*#\1#')"
             source_file="$(basename "$source_url" .tar.gz)"
             version="${source_version}-$(printf '%s' "$source_file" | sed -E 's/^android-studio-//; s/-linux$//')"
-            sed -i "s|source: .*$|source: $source_url|g" snap/snapcraft.yaml 
+            sed -i "s|source: .*$|source: $source_url|g" snap/snapcraft.yaml
             sed -i 's/^\(version: \).*$/\1'"\"$version\""'/' snap/snapcraft.yaml
