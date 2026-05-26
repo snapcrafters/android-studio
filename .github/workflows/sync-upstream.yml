@@ -22,8 +22,10 @@ jobs:
         with:
           token: ${{ secrets.SNAPCRAFTERS_BOT_COMMIT }}
           update-script: |
-            source_url="$(curl -sL https://developer.android.com/studio/index.html | grep -Eo '"((https)?://.*linux.tar.gz)"' | tr -d '"')"
-            codename="$(curl -sL https://developer.android.com/studio/index.html | grep -Po 'Download Android Studio (?!today)[A-Za-z0-9]+' | head -n1 | cut -d ' ' -f4)"
-            version="$(basename "$source_url" .tar.gz | grep -oP '\d+\.\d+\.\d+\.\d+')-$codename"
-            sed -i "s|source: .*$|source: $source_url|g" snap/snapcraft.yaml 
+            release_page="$(curl -sL https://developer.android.com/studio/releases)"
+            source_url="$(printf '%s' "$release_page" | grep -oP 'https://edgedl\.me\.gvt1\.com/android/studio/ide-zips/\d+\.\d+\.\d+\.\d+/android-studio-[^"]+-linux\.tar\.gz' | head -n1)"
+            source_version="$(printf '%s' "$source_url" | sed -E 's#^.*/ide-zips/([0-9.]+)/.*#\1#')"
+            source_file="$(basename "$source_url" .tar.gz)"
+            version="${source_version}-$(printf '%s' "$source_file" | sed -E 's/^android-studio-//; s/-linux$//')"
+            sed -i "s|source: .*$|source: $source_url|g" snap/snapcraft.yaml
             sed -i 's/^\(version: \).*$/\1'"\"$version\""'/' snap/snapcraft.yaml
