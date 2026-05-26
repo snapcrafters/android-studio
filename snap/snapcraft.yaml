@@ -1,5 +1,5 @@
 name: android-studio
-version: "2025.3.4.6-panda4"
+version: "2025.3.4.7-panda4-patch1"
 summary: The IDE for Android
 description: |
   Android Studio provides the fastest tools for building apps on every type
@@ -22,6 +22,6 @@ apps:
 parts:
   android-studio:
     plugin: dump
-    source: https://edgedl.me.gvt1.com/android/studio/ide-zips/2025.3.4.6/android-studio-panda4-linux.tar.gz
+    source: https://edgedl.me.gvt1.com/android/studio/ide-zips/2025.3.4.7/android-studio-panda4-patch1-linux.tar.gz
     build-attributes:
       - no-patchelf
